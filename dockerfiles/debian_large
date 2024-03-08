@@ -4,12 +4,12 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && \
 	apt-get install -y apt-utils bsdgames bsdmainutils ca-certificates clang \
 	cowsay curl g++ gcc gdbm-l10n git \
-        lua50 luajit lynx make \
-	nano nodejs openssl python3 python3-cryptography \
+        lua50 luajit make \
+	nodejs openssl python3 \
 	python3-numpy python3-pandas python3-pip \
         python3-yaml readline-common \
-	ssh vim wget \
-	xxd iptables less && \
+        vim wget \
+	xxd less && \
         python3 -m pip install textual
 
 # Make a user, then copy over the /example directory
