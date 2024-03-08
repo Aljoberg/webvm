@@ -2,11 +2,11 @@ FROM --platform=i386 i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get -y upgrade && \
-	apt-get install -y apt-utils bsdgames bsdmainutils ca-certificates clang \
-	cowsay curl g++ gcc gdbm-l10n git \
+	apt-get install -y apt-utils bsdgames bsdmainutils clang \
+	cowsay curl g++ gcc git \
         lua50 luajit make \
 	nodejs openssl python3 \
-	python3-numpy python3-pandas python3-pip \
+	python3-pip \
         python3-yaml readline-common \
         vim wget \
 	xxd less && \
