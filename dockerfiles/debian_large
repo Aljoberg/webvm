@@ -6,12 +6,15 @@ RUN apt-get update && apt-get -y upgrade && \
         # bsdgames bsdmainutils \
 	cowsay g++ gcc git \
         lua50 luajit \
-	nodejs npm python3 \
+        python3 \
 	python3-pip \
         vim wget \
 	xxd less && \
         python3 -m pip install textual && npm i ink react
-
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+RUN nvm install 20
+RUN nvm use 20
 # Make a user, then copy over the /example directory
 RUN useradd -m user && echo "user:password" | chpasswd
 COPY --chown=user:user ./examples /home/user/examples
