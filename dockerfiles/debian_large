@@ -5,7 +5,7 @@ RUN apt-get update && apt-get -y upgrade && \
 	apt-get install -y apt-utils \
         # bsdgames bsdmainutils \
 	cowsay g++ gcc git \
-        lua50 luajit \
+        lua50 luajit curl \
         python3 \
 	python3-pip \
         vim wget \
