@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y upgrade && \
 	python3-pip \
         vim wget \
 	xxd less && \
-        python3 -m pip install textual && python3 -m pip install pytermgui
+        python3 -m pip install textual && npm i ink react
 
 # Make a user, then copy over the /example directory
 RUN useradd -m user && echo "user:password" | chpasswd
