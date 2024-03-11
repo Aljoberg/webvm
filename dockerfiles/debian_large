@@ -1,6 +1,6 @@
 FROM --platform=i386 i386/debian:buster
 ARG DEBIAN_FRONTEND=noninteractive
-
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update && apt-get -y upgrade && \
 	apt-get install -y apt-utils \
         # bsdgames bsdmainutils \
@@ -9,13 +9,15 @@ RUN apt-get update && apt-get -y upgrade && \
         python3 \
 	python3-pip \
         vim wget \
-	xxd less # && \
-        # python3 -m pip install textual && npm i ink react
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-RUN export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-RUN nvm install 20
-RUN nvm use 20
-RUN npm i ink react
+	xxd less && \
+        python3 -m pip install textual && npm i ink react
+ENV NVM_DIR ~/.nvm
+ENV NODE_VERSION 20
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
+  && . $NVM_DIR/nvm.sh \
+  && nvm install $NODE_VERSION && nvm alias default $NODE_VERSION && nvm use default
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 # Make a user, then copy over the /example directory
 RUN useradd -m user && echo "user:password" | chpasswd
 COPY --chown=user:user ./examples /home/user/examples
