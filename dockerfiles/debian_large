@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y upgrade && \
 	python3-pip \
         vim wget \
 	xxd less # && \
-        # python3 -m pip install textual && npm i ink react
+        python3 -m pip install textual
 ENV NVM_DIR "~/.nvm"
 ENV NODE_VERSION 20
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash \
